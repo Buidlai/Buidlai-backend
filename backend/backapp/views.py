@@ -8,7 +8,8 @@ from django.utils.encoding import force_bytes, force_str
 from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.authtoken.models import Token
-from .serializers import CustomUserSerializer
+from .serializers import CustomUserSerializer, UserStatusSerializer
+from .models import UserStatus
 
 User = get_user_model()
 
@@ -31,20 +32,20 @@ class SignUpView(APIView):
     send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
 
 class ActivateAccountView(APIView):
-    def post(self, request):
-        uidb64 = request.data.get('uidb64')
-        token = request.data.get('token')
-        try:
-            uid = force_str(urlsafe_base64_decode(uidb64))
-            user = User.objects.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            user = None
+  def post(self, request):
+    uidb64 = request.data.get('uidb64')
+    token = request.data.get('token')
+    try:
+      uid = force_str(urlsafe_base64_decode(uidb64))
+      user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+      user = None
 
-        if user is not None and default_token_generator.check_token(user, token):
-            user.is_active = True
-            user.save()
-            return Response({'message': 'Account activated successfully. You can now log in.'}, status=status.HTTP_200_OK)
-        return Response({'message': 'Invalid activation token or UID.'}, status=status.HTTP_400_BAD_REQUEST)
+    if user is not None and default_token_generator.check_token(user, token):
+      user.is_active = True
+      user.save()
+      return Response({'message': 'Account activated successfully. You can now log in.'}, status=status.HTTP_200_OK)
+    return Response({'message': 'Invalid activation token or UID.'}, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
   def post(self, request):
@@ -56,7 +57,7 @@ class LoginView(APIView):
         login(request, user)
         token, _ = Token.objects.get_or_create(user=user)
         return Response({'token': token.key}, status=status.HTTP_200_OK)
-    return Response({'message': 'Account is not activated.'}, status=status.HTTP_403_FORBIDDEN)
+      return Response({'message': 'Account is not activated.'}, status=status.HTTP_403_FORBIDDEN)
     return Response({'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class LogoutView(APIView):
@@ -64,9 +65,11 @@ class LogoutView(APIView):
     logout(request)
     return Response({'message': 'Logged out successfully'}, status=status.HTTP_200_OK)
 
-
-
 class UserStatusView(APIView):
+  def get(self, request):
+    user_statuses = UserStatus.objects.all()
+    serializer = UserStatusSerializer(user_statuses, many=True)
+    return Response(serializer.data)
   def post(self, request):
     serializer = UserStatusSerializer(data=request.data)
     if serializer.is_valid():
