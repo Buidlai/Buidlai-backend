@@ -15,4 +15,4 @@ class CustomUser(AbstractUser):
   user_status = models.ForeignKey(UserStatus, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='User Status')
 
   def __str__(self):
-      return self.username
+    return self.username
