@@ -46,9 +46,8 @@ class LoginView(APIView):
     user = authenticate(request, username=username, password=password)
     if user is not None:
       if user.is_active:
-        login(request, user)
-        token, _ = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key}, status=status.HTTP_200_OK)
+        serializer = CustomUserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
       return Response({'message': 'Account is not activated.'}, status=status.HTTP_403_FORBIDDEN)
     return Response({'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
