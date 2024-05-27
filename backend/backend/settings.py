@@ -71,6 +71,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+# PASSWORD_HASHERS = [
+#     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+#     'django.contrib.auth.hashers.Argon2PasswordHasher',
+# ]
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

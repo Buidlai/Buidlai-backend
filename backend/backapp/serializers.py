@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import CustomUser, UserStatus
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth import password_validation
-
+from .models import CustomUser, UserStatus
 
 class UserStatusSerializer(serializers.ModelSerializer):
   class Meta:
@@ -18,6 +18,10 @@ class CustomUserSerializer(serializers.ModelSerializer):
   def validate_password(self, value):
     password_validation.validate_password(value)
     return value
+  
+  def create(self, validated_data):
+    validated_data['password'] = make_password(validated_data['password'])
+    return super().create(validated_data)
 
   class Meta:
     model = CustomUser

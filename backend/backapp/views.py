@@ -1,51 +1,43 @@
+import random
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
+from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.authtoken.models import Token
 from .serializers import CustomUserSerializer, UserStatusSerializer
-from .models import UserStatus
+from .models import UserStatus, CustomUser
 
-User = get_user_model()
 
 class SignUpView(APIView):
   def post(self, request):
     serializer = CustomUserSerializer(data=request.data)
     if serializer.is_valid():
-      user = serializer.save(is_active=False)
-
-      uid = urlsafe_base64_encode(force_bytes(user.pk))
-      token = default_token_generator.make_token(user)
-      self.send_activation_token(user.email, uid, token)
-
+      activation_token = str(random.randint(1000, 9999))  # Generate random 4-digit number
+      user = serializer.save(is_active=False, auth_token=activation_token)
+      self.send_activation_token(user.email, activation_token)
       return Response({'message': 'Account created. Check your email for activation token.'}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-  def send_activation_token(self, email, uid, token):
+  def send_activation_token(self, email, token):
     subject = 'Activation Token'
-    message = f'Your activation token is: {token}\nUse this UID: {uid}'
+    message = f'Your activation token is: {token}'
     send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
 
 class ActivateAccountView(APIView):
   def post(self, request):
-    uidb64 = request.data.get('uidb64')
     token = request.data.get('token')
     try:
-      uid = force_str(urlsafe_base64_decode(uidb64))
-      user = User.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+      user = CustomUser.objects.get(auth_token=token)
+    except CustomUser.DoesNotExist:
       user = None
 
-    if user is not None and default_token_generator.check_token(user, token):
+    if user is not None and token.isdigit() and len(token) == 4:
       user.is_active = True
       user.save()
       return Response({'message': 'Account activated successfully. You can now log in.'}, status=status.HTTP_200_OK)
-    return Response({'message': 'Invalid activation token or UID.'}, status=status.HTTP_400_BAD_REQUEST)
+    return Response({'message': 'Invalid activation token.'}, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
   def post(self, request):
