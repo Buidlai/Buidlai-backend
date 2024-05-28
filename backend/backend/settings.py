@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'buidfced_buildi',
         'USER': 'buidfced_buildi_user',
         'PASSWORD': '098LQUKrSUnD8pdH3sUYNOD3ENT5WyeB',
-        'HOST': 'dpg-cpaul221hbls7393l67g-a',
+        'HOST': 'postgres://buidfced_buildi_user:098LQUKrSUnD8pdH3sUYNOD3ENT5WyeB@dpg-cpaul221hbls7393l67g-a.oregon-postgres.render.com/buidfced_buildi',
         'PORT': '5432',
     }
 }
