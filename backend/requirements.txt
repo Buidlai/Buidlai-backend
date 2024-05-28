@@ -2,14 +2,14 @@ asgiref==3.7.2
 async-timeout==4.0.3
 brotlipy==0.7.0
 certifi==2022.5.18.1
-cffi @ file:///C:/ci_310/cffi_1642682485096/work
+cffi
 charset-normalizer==2.0.12
 cloudinary==1.29.0
-colorama @ file:///tmp/build/80754af9/colorama_1607707115595/work
+colorama
 conda==4.12.0
-conda-content-trust @ file:///tmp/build/80754af9/conda-content-trust_1617045594566/work
-conda-package-handling @ file:///C:/ci/conda-package-handling_1649106011304/work
-cryptography @ file:///C:/ci/cryptography_1639414720302/work
+conda-content-trust
+conda-package-handling
+cryptography
 distlib==0.3.8
 dj-database-url==2.1.0
 Django==4.2.7
@@ -22,8 +22,8 @@ django-mathfilters==1.0.0
 djangorestframework==3.14.0
 filelock==3.13.1
 gunicorn==21.2.0
-idna @ file:///tmp/build/80754af9/idna_1637925883363/work
-menuinst @ file:///C:/ci/menuinst_1631733438520/work
+idna
+menuinst
 numpy==1.23.4
 packaging==23.2
 pandas==1.5.1
@@ -31,24 +31,24 @@ Pillow==8.0.0
 platformdirs==4.1.0
 psycopg2==2.9.9
 pycosat==0.6.3
-pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
-pyOpenSSL @ file:///opt/conda/conda-bld/pyopenssl_1643788558760/work
-PySocks @ file:///C:/ci/pysocks_1605307512533/work
+pycparser
+pyOpenSSL
+PySocks
 python-dateutil==2.8.2
 python-decouple==3.6
 python-dotenv==0.21.0
 pytz==2021.3
 pywin32==302
 redis==5.0.1
-requests @ file:///opt/conda/conda-bld/requests_1641824580448/work
-ruamel-yaml-conda @ file:///C:/ci/ruamel_yaml_1616016898638/work
-six @ file:///tmp/build/80754af9/six_1644875935023/work
+requests
+ruamel-yaml-conda
+six
 sqlparse==0.4.1
-tqdm @ file:///opt/conda/conda-bld/tqdm_1647339053476/work
+tqdm
 typing_extensions==4.1.1
 tzdata==2022.5
 urllib3==1.26.9
 virtualenv==20.25.0
 whitenoise==6.6.0
-win-inet-pton @ file:///C:/ci/win_inet_pton_1605306162074/work
+win-inet-pton
 wincertstore==0.2
