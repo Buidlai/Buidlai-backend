@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-7b!-4)$27nx(vh5#m-z6pg+5o%$+txsk7z+ksni3hse&^wf@q%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://backend.buidlai.pro']
 
 
 # Application definition
@@ -90,6 +90,17 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'buildi',
+#         'USER': 'postgres',
+#         'PASSWORD': 'toyman',
+#         # 'HOST': 'postgres',
+#         # 'PORT': '5432',
+#     }
+# }
 
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
