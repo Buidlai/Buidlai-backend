@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'backapp',
+    'backapp.apps.BackappConfig',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +71,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+# PASSWORD_HASHERS = [
+#     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+#     'django.contrib.auth.hashers.Argon2PasswordHasher',
+# ]
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -85,6 +90,14 @@ DATABASES = {
         # 'PORT': '8000',
     }
 }
+
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'buidlai.pro'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True  
+EMAIL_HOST_USER = 'info@buidlai.pro'
+EMAIL_HOST_PASSWORD = 'buidfceddaniel'
 
 
 # Password validation
@@ -117,6 +130,14 @@ USE_I18N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'backapp.CustomUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    # Other settings...
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
