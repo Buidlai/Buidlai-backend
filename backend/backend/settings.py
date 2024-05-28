@@ -85,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'buidfced_buildi',
         'USER': 'buidfced_buidbackend',
-        'PASSWORD': 'thebackend.'
+        'PASSWORD': 'thebackend.',
         'HOST': 'localhost',
         'PORT': '127.0.0.1',
     }
