@@ -86,8 +86,8 @@ DATABASES = {
         'NAME': 'buidfced_buildi',
         'USER': 'buidfced_buidbackend',
         'PASSWORD': 'thebackend.',
-        'HOST': 'localhost',
-        'PORT': '127.0.0.1',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
