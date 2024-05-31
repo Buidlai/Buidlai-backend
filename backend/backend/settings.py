@@ -15,7 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+STATIC_ROOT = '/home/buidfced/backend.buidlai.pro/backend.buidlai.pro/static'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-7b!-4)$27nx(vh5#m-z6pg+5o%$+txsk7z+ksni3hse&^wf@q%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://backend.buidlai.pro']
+ALLOWED_HOSTS = ['https://backend.buidlai.pro', 'backend.buidlai.pro']
 
 
 # Application definition
@@ -80,13 +80,14 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'buidfced_buildi',
-        'USER': 'buidfced_buildi_user',
-        'PASSWORD': '098LQUKrSUnD8pdH3sUYNOD3ENT5WyeB',
-        'HOST': 'dpg-cpaul221hbls7393l67g-a.oregon-postgres.render.com',
+        'USER': 'buidfced_buidbackend',
+        'PASSWORD': 'thebackend.',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
