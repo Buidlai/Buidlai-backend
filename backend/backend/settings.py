@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-7b!-4)$27nx(vh5#m-z6pg+5o%$+txsk7z+ksni3hse&^wf@q%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://backend.buidlai.pro', 'backend.buidlai.pro']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -81,27 +81,27 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'buidfced_buildi',
-        'USER': 'buidfced_buidbackend',
-        'PASSWORD': 'thebackend.',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'buildi',
-#         'USER': 'postgres',
-#         'PASSWORD': 'toyman',
-#         # 'HOST': 'postgres',
-#         # 'PORT': '5432',
+#         'NAME': 'buidfced_buildi',
+#         'USER': 'buidfced_buidbackend',
+#         'PASSWORD': 'thebackend.',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'buildi',
+        'USER': 'postgres',
+        'PASSWORD': 'toyman',
+        # 'HOST': 'postgres',
+        # 'PORT': '5432',
+    }
+}
 
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

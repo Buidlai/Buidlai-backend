@@ -17,3 +17,17 @@ class CustomUser(AbstractUser):
 
   def __str__(self):
     return self.username
+
+class PersonalInformation(models.Model):
+  bio = models.TextField(max_length=500, verbose_name="User Biography")
+  port_link = models.URLField(max_length=200, verbose_name="Porfolio Link")
+  country = models.TextField(max_length=200, verbose_name='Country')
+  language = models.TextField(max_length=200, verbose_name="Language")
+  professional_role = models.TextField(max_length=200, verbose_name="Professional Role")
+  resume = models.FileField(upload_to='resumes/')
+  picture = models.ImageField(upload_to='pictures/')
+  skills = models.TextField(max_length=500, verbose_name="Skills")
+  user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, verbose_name="User", related_name='personal_information')
+
+  def __str__(self):
+    return self.user.username
