@@ -1,12 +1,17 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import password_validation
-from .models import CustomUser, UserStatus
+from .models import CustomUser, UserStatus, PersonalInformation
 
 class UserStatusSerializer(serializers.ModelSerializer):
   class Meta:
     model = UserStatus
     fields = ['id', 'status_name', 'description']
+
+class PersonalInformationSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = PersonalInformation
+    fields = ['id', 'bio', 'port_link', 'country', 'language', 'professional_role', 'resume', 'picture', 'skills', 'user']
 
 class CustomUserSerializer(serializers.ModelSerializer):
   password = serializers.CharField(

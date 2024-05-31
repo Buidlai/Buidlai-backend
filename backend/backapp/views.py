@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.authtoken.models import Token
-from .serializers import CustomUserSerializer, UserStatusSerializer
+from .serializers import CustomUserSerializer, UserStatusSerializer, PersonalInformationSerializer
 from .models import UserStatus, CustomUser
 
 
@@ -67,3 +67,20 @@ class UserStatusView(APIView):
       serializer.save()
       return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class PersonalInformationView(APIView):
+  def get(self, request, user_id):
+    try:
+      personal_info = PersonalInformation.objects.get(user_id=user_id)
+      serializer = PersonalInformationSerializer(personal_info)
+      return Response(serializer.data)
+    except PersonalInformation.DoesNotExist:
+      return Response({'message': 'Personal information not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+  def post(self, request):
+    serializer = PersonalInformationSerializer(data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
