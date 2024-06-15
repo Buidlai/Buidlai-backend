@@ -8,11 +8,6 @@ class UserStatusSerializer(serializers.ModelSerializer):
     model = UserStatus
     fields = ['id', 'status_name', 'description']
 
-class PersonalInformationSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = PersonalInformation
-    fields = ['id', 'bio', 'port_link', 'country', 'language', 'professional_role', 'resume', 'picture', 'skills', 'user']
-
 class CustomUserSerializer(serializers.ModelSerializer):
   password = serializers.CharField(
     write_only=True,
@@ -31,3 +26,19 @@ class CustomUserSerializer(serializers.ModelSerializer):
   class Meta:
     model = CustomUser
     fields = ['id', 'username', 'first_name', 'last_name', 'email', 'phone_number', 'user_status', 'password']
+
+
+class PersonalInformationSerializer(serializers.ModelSerializer):
+  picture_url = serializers.SerializerMethodField()
+  # user = CustomUserSerializer()
+  username = serializers.SerializerMethodField()
+  class Meta:
+    model = PersonalInformation
+    fields = ['id', 'bio', 'port_link', 'country', 'language', 'professional_role', 'resume', 'picture', 'skills', 'user', 'picture_url', 'username']
+
+  def get_picture_url(self, obj):
+    return obj.person_img()
+
+  def get_username(self, obj):
+    return obj.user.username
+

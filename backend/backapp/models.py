@@ -31,3 +31,8 @@ class PersonalInformation(models.Model):
 
   def __str__(self):
     return self.user.username
+
+  def person_img(self):
+    if self.picture:
+      return self.picture.url
+
