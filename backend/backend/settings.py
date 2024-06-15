@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-7b!-4)$27nx(vh5#m-z6pg+5o%$+txsk7z+ksni3hse&^wf@q%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.backend.buidlai.pro/', 'backend.buidlai.pro/']
+ALLOWED_HOSTS = ['www.backend.buidlai.pro/', 'backend.buidlai.pro']
 
 
 # Application definition
